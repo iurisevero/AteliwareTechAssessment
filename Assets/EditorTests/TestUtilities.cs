@@ -11,16 +11,16 @@ public class TestUtilities
     [Test]
     public void TestChessboardToMatriz() {
         (int, int) coordinate = Utilities.ChessboardToMatriz("B1");
-        Assert.AreEqual(coordinate, (1, 7));
+        Assert.AreEqual((1, 7), coordinate);
 
         coordinate = Utilities.ChessboardToMatriz("H3");
-        Assert.AreEqual(coordinate, (7, 5));
+        Assert.AreEqual((7, 5), coordinate);
 
         coordinate = Utilities.ChessboardToMatriz("d8");
-        Assert.AreEqual(coordinate, (3, 0));
+        Assert.AreEqual((3, 0), coordinate);
 
         coordinate = Utilities.ChessboardToMatriz("J9");
-        Assert.AreEqual(coordinate, (-1, -1));
+        Assert.AreEqual((-1, -1), coordinate);
     }
 
     [Test]

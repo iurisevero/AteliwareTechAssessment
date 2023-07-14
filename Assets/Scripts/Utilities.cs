@@ -32,11 +32,4 @@ public static class Utilities
         }
         return matrizCoordinate;
     }
-
-    public static int SSSPDijkstra(
-        List<(int, int)>[] graph, int source, int destiny, int size
-    ) {
-        // To do
-        return 0;
-    }
 }
