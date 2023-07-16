@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddableInt : IComparable<AddableInt>, IAddable<AddableInt>
+public class AddableInt 
+    : IComparable<AddableInt>, IAddable<AddableInt>, IEquatable<AddableInt>
 {
     public int Value { get; }
 
@@ -17,6 +18,11 @@ public class AddableInt : IComparable<AddableInt>, IAddable<AddableInt>
         return Value.CompareTo(other.Value);
     }
 
+    public bool Equals(AddableInt other)
+    {
+        return Value.Equals(other.Value);
+    }
+
     public AddableInt Add(AddableInt other)
     {
         return Value + other.Value;
@@ -28,7 +34,8 @@ public class AddableInt : IComparable<AddableInt>, IAddable<AddableInt>
     }
 }
 
-public class ReverseInt : IComparable<ReverseInt>, IAddable<ReverseInt>
+public class ReverseInt
+    : IComparable<ReverseInt>, IAddable<ReverseInt>, IEquatable<ReverseInt>
 {
     public int Value { get; }
 
@@ -43,6 +50,11 @@ public class ReverseInt : IComparable<ReverseInt>, IAddable<ReverseInt>
         return -Value.CompareTo(other.Value);
     }
 
+    public bool Equals(ReverseInt other)
+    {
+        return Value.Equals(other.Value);
+    }
+
     public ReverseInt Add(ReverseInt other)
     {
         return Value + other.Value;
@@ -54,7 +66,8 @@ public class ReverseInt : IComparable<ReverseInt>, IAddable<ReverseInt>
     }
 }
 
-public class AddableFloat : IComparable<AddableFloat>, IAddable<AddableFloat>
+public class AddableFloat 
+    : IComparable<AddableFloat>, IAddable<AddableFloat>, IEquatable<AddableFloat>
 {
     public float Value { get; }
 
@@ -68,6 +81,11 @@ public class AddableFloat : IComparable<AddableFloat>, IAddable<AddableFloat>
         return Value.CompareTo(other.Value);
     }
 
+    public bool Equals(AddableFloat other)
+    {
+        return Value.Equals(other.Value);
+    }
+
     public AddableFloat Add(AddableFloat other)
     {
         return Value + other.Value;
@@ -79,7 +97,8 @@ public class AddableFloat : IComparable<AddableFloat>, IAddable<AddableFloat>
     }
 }
 
-public class ReverseFloat : IComparable<ReverseFloat>, IAddable<ReverseFloat>
+public class ReverseFloat 
+    : IComparable<ReverseFloat>, IAddable<ReverseFloat>, IEquatable<ReverseFloat>
 {
     public float Value { get; }
 
@@ -94,6 +113,11 @@ public class ReverseFloat : IComparable<ReverseFloat>, IAddable<ReverseFloat>
         return -Value.CompareTo(other.Value);
     }
 
+    public bool Equals(ReverseFloat other)
+    {
+        return Value.Equals(other.Value);
+    }
+
     public ReverseFloat Add(ReverseFloat other)
     {
         return Value + other.Value;
@@ -105,7 +129,8 @@ public class ReverseFloat : IComparable<ReverseFloat>, IAddable<ReverseFloat>
     }
 }
 
-public class AddableDouble : IComparable<AddableDouble>, IAddable<AddableDouble>
+public class AddableDouble 
+    : IComparable<AddableDouble>, IAddable<AddableDouble>, IEquatable<AddableDouble>
 {
     public double Value { get; }
 
@@ -119,6 +144,11 @@ public class AddableDouble : IComparable<AddableDouble>, IAddable<AddableDouble>
         return Value.CompareTo(other.Value);
     }
 
+    public bool Equals(AddableDouble other)
+    {
+        return Value.Equals(other.Value);
+    }
+
     public AddableDouble Add(AddableDouble other)
     {
         return Value + other.Value;
@@ -130,7 +160,8 @@ public class AddableDouble : IComparable<AddableDouble>, IAddable<AddableDouble>
     }
 }
 
-public class ReverseDouble : IComparable<ReverseDouble>, IAddable<ReverseDouble>
+public class ReverseDouble 
+    : IComparable<ReverseDouble>, IAddable<ReverseDouble>, IEquatable<ReverseDouble>
 {
     public double Value { get; }
 
@@ -143,6 +174,11 @@ public class ReverseDouble : IComparable<ReverseDouble>, IAddable<ReverseDouble>
     {
         // Reversed comparation
         return -Value.CompareTo(other.Value);
+    }
+
+    public bool Equals(ReverseDouble other)
+    {
+        return Value.Equals(other.Value);
     }
 
     public ReverseDouble Add(ReverseDouble other)

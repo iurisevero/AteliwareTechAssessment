@@ -28,6 +28,16 @@ public class WeightedGraph<TElement, TWeight>
         this.nodes = new Dictionary<TElement, List<(TElement, TWeight)>>(nodes);
     }
 
+    public void SetInfiniteNumber(TWeight infiniteNumber) {
+        this.infiniteNumber = infiniteNumber;
+    }
+
+    public void AddNode(TElement source) {
+        if(!nodes.ContainsKey(source)) {
+            this.nodes[source] = new List<(TElement, TWeight)>();
+        }
+    }
+
     public void AddNode(TElement source, TElement destiny, TWeight weight) {
         if(nodes.ContainsKey(source)) {
             this.nodes[source].Add((destiny, weight));
@@ -96,7 +106,7 @@ public class WeightedGraph<TElement, TWeight>
 
     // Single Source Shortest Path
     public TWeight SSSPDijkstra(
-        TElement source, TElement destiny, TWeight minPriority
+        TElement source, TElement destiny, TWeight sourceDistance, TWeight minPriority
     ) {
         foreach(var element in this.nodes) {
             this.distances[element.Key] = infiniteNumber;
@@ -106,7 +116,7 @@ public class WeightedGraph<TElement, TWeight>
         PriorityQueue<(TElement, TWeight), TWeight> toVisit = 
             new PriorityQueue<(TElement, TWeight), TWeight>(minPriority);
 
-        this.distances[source] = default(TWeight);
+        this.distances[source] = sourceDistance;
         toVisit.Insert(
             (source, this.distances[source]), 
             this.distances[source]
@@ -116,7 +126,6 @@ public class WeightedGraph<TElement, TWeight>
             var node = toVisit.Top().Item1;
             var distance = toVisit.Top().Item2;
             toVisit.Pop();
-
             if (distance.CompareTo(this.distances[node]) > 0) continue;
 
             foreach(var neighbor in this.nodes[node]) {
