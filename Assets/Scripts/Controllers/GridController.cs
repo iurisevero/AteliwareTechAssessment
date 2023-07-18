@@ -9,39 +9,43 @@ public class GridController : MonoBehaviour
     [SerializeField] GameObject drone;
     [SerializeField] GameObject package;
     [SerializeField] GameObject destination;
+    [SerializeField] Animator animator;
     private static readonly Color32 droneColor = new Color32(0, 108, 0, 255);
     private static readonly Color32 packageColor = new Color32(255, 255, 83, 255);
     private static readonly Color32 destinationColor = new Color32(192, 0, 0, 255);
     private Coroutine pathTraversalRoutine;
 
-    // void Start()
-    // {
-    //     List<(string, string)> path = new List<(string, string)>(){
-    //         ("A1", "B1"),
-    //         ("B1", "C1"),
-    //         ("C1", "C2"),
-    //         ("C2", "C3"),
-    //         ("C3", "D3"),
-    //         ("D3", "D4"),
-    //         ("D4", "D5"),
-    //         ("D5", "E5"),
-    //         ("E5", "E6"),
-    //         ("E6", "F6"),
-    //         ("F6", "G6"),
-    //         ("G6", "G7"),
-    //         ("G7", "H7"),
-    //         ("H7", "H8")
-    //     };
-    //     string startPoint = "A1", pickUpPoint = "D4", endPoint = "H8";
-    //     TraversePath(
-    //         startPoint, pickUpPoint, endPoint, path
-    //     );
-    // }
+    void Start()
+    {
+        // List<(string, string)> path = new List<(string, string)>(){
+        //     ("A1", "B1"),
+        //     ("B1", "C1"),
+        //     ("C1", "C2"),
+        //     ("C2", "C3"),
+        //     ("C3", "D3"),
+        //     ("D3", "D4"),
+        //     ("D4", "D5"),
+        //     ("D5", "E5"),
+        //     ("E5", "E6"),
+        //     ("E6", "F6"),
+        //     ("F6", "G6"),
+        //     ("G6", "G7"),
+        //     ("G7", "H7"),
+        //     ("H7", "H8")
+        // };
+        // string startPoint = "A1", pickUpPoint = "D4", endPoint = "H8";
+        // TraversePath(
+        //     startPoint, pickUpPoint, endPoint, path
+        // );
+    }
 
     private IEnumerator TraversePathRoutine(
         string pickUpPoint,
         List<(string, string)> path
     ) {
+        animator.SetTrigger("In");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
+
         foreach(var nodes in path) {
             Vector2 direction = Utilities.GetDirectionFromNodes(
                 nodes.Item1, nodes.Item2
@@ -56,6 +60,10 @@ public class GridController : MonoBehaviour
 
         drone.SetActive(false);
         destination.GetComponentInChildren<Image>().color = packageColor;
+
+        yield return new WaitForSeconds(1f);
+
+        animator.SetTrigger("Out");
     }
 
     private IEnumerator Move(Vector2 direction, float moveDuration) {
