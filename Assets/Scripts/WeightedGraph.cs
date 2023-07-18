@@ -10,11 +10,13 @@ public class WeightedGraph<TElement, TWeight>
     TWeight infiniteNumber;
     public Dictionary<TElement, List<(TElement, TWeight)>> nodes { get; private set; }
     public Dictionary<TElement, TWeight> distances { get; private set; }
+    public Dictionary<TElement, TElement> parent { get; private set; }
     public Dictionary<TElement, Boolean> visited { get; private set; }
 
     public WeightedGraph(TWeight infiniteNumber) {
         this.infiniteNumber = infiniteNumber;
         this.distances = new Dictionary<TElement, TWeight>();
+        this.parent = new Dictionary<TElement, TElement>();
         this.visited = new Dictionary<TElement, bool>();
         this.nodes = new Dictionary<TElement, List<(TElement, TWeight)>>();
     }
@@ -110,6 +112,8 @@ public class WeightedGraph<TElement, TWeight>
     ) {
         foreach(var element in this.nodes) {
             this.distances[element.Key] = infiniteNumber;
+            this.visited[element.Key] = false;
+            this.parent[element.Key] = default(TElement);
         }
 
         
@@ -117,16 +121,24 @@ public class WeightedGraph<TElement, TWeight>
             new PriorityQueue<(TElement, TWeight), TWeight>(minPriority);
 
         this.distances[source] = sourceDistance;
+        this.parent[source] = source;
+
         toVisit.Insert(
             (source, this.distances[source]), 
             this.distances[source]
         );
+        
 
         while(!toVisit.IsEmpty()) {
             var node = toVisit.Top().Item1;
             var distance = toVisit.Top().Item2;
             toVisit.Pop();
+            
             if (distance.CompareTo(this.distances[node]) > 0) continue;
+
+            if(this.visited[node]) continue;
+
+            this.visited[node] = true;
 
             foreach(var neighbor in this.nodes[node]) {
                 var neighborNode = neighbor.Item1;
@@ -135,8 +147,9 @@ public class WeightedGraph<TElement, TWeight>
                 if (this.distances[node].Add(neighborDistance).CompareTo(
                     this.distances[neighborNode]) < 0
                 ) {
-                    this.distances[neighborNode]  = this.distances[node].
-                        Add(neighborDistance);
+                    this.distances[neighborNode]  = 
+                        this.distances[node].Add(neighborDistance);
+                    this.parent[neighborNode] = node; 
                     toVisit.Insert(
                         (neighborNode, this.distances[neighborNode]), 
                         this.distances[neighborNode]
@@ -146,5 +159,20 @@ public class WeightedGraph<TElement, TWeight>
         }
 
         return this.distances[destiny];
+    }
+
+    public List<(TElement, TElement)> GetSSPDPath(TElement source, TElement destiny) {
+        Debug.Log($"GetSSPDPath: {source} -> {destiny}");
+        List<(TElement, TElement)> path = new List<(TElement, TElement)>();
+        TElement node = destiny;
+
+        do {
+            var a = this.parent[node];
+            path.Add((a, node));
+            node = a;
+        } while (!node.Equals(source) || node.Equals(default(TElement)));
+
+        path.Reverse();
+        return path;
     }
 }

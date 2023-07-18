@@ -26,7 +26,7 @@ public class UserInputController : MonoBehaviour
     }
 
     public void GetRoute() {
-        WeightedGraph<string, ReverseFloat> board;
+        WeightedGraph<string, AddableFloat> board;
         Observable.FromCoroutine<string>(observer =>
         {
             return SendRequest(observer, API_URL);
@@ -46,19 +46,42 @@ public class UserInputController : MonoBehaviour
             Debug.Log("Board: " + debug);
 
             float start = board.SSSPDijkstra(startPoint.GetInputValue(), pickUpPoint.GetInputValue(), 0, -1).Value;
-            float mid = board.SSSPDijkstra(pickUpPoint.GetInputValue(), endPoint.GetInputValue(), 0, -1).Value;
             Debug.Log($"Dijkstra from {startPoint.GetInputValue()} to {pickUpPoint.GetInputValue()}: {start}");
+            
+            debug = "";
+            var path = board.GetSSPDPath(startPoint.GetInputValue(), pickUpPoint.GetInputValue());
+            foreach(var node in  path)
+                debug += "(" + node.Item1 + ", " + node.Item2 + ") -> ";
+            debug += "\n";
+            Debug.Log("Path: " + debug);
+
+            float mid = board.SSSPDijkstra(pickUpPoint.GetInputValue(), endPoint.GetInputValue(), 0, -1).Value;
             Debug.Log($"Dijkstra from {pickUpPoint.GetInputValue()} to {endPoint.GetInputValue()}: {mid}");
-            Debug.Log($"Full path: {start + mid}");
+            
+            debug = "";
+            var path2 = board.GetSSPDPath(pickUpPoint.GetInputValue(), endPoint.GetInputValue());
+            foreach(var node in  path2)
+                debug += "(" + node.Item1 + ", " + node.Item2 + ") -> ";
+            debug += "\n";
+            Debug.Log("Path 2: " + debug);
+            
+            Debug.Log($"Full path value: {start + mid}");
+            debug = "";
+            foreach(var node in  path)
+                debug += node.Item1 + " -> ";
+            foreach(var node in  path2)
+                debug += node.Item1 + " -> ";
+            debug += endPoint.GetInputValue() + "\n";
+            Debug.Log($"Full path: {debug}");
         }, error =>
         {
             Debug.LogError($"Erro na requisição GET: {error.Message}");
         });
     }
 
-    public WeightedGraph<string, ReverseFloat> HandleResponse(string response) {
-        WeightedGraph<string, ReverseFloat> board = 
-            new WeightedGraph<string, ReverseFloat>(float.MaxValue);
+    public WeightedGraph<string, AddableFloat> HandleResponse(string response) {
+        WeightedGraph<string, AddableFloat> board = 
+            new WeightedGraph<string, AddableFloat>(float.MaxValue);
         Dictionary<string, Dictionary<string, float>> nodes = 
                 JsonConvert.DeserializeObject<
                     Dictionary<string, Dictionary<string, float>>

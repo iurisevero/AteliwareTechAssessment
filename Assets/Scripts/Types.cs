@@ -28,6 +28,10 @@ public class AddableInt
         return Value + other.Value;
     }
 
+    public override string ToString() {
+        return Value.ToString();
+    }
+
     public static implicit operator AddableInt(int value)
     {
         return new AddableInt(value);
@@ -60,6 +64,10 @@ public class ReverseInt
         return Value + other.Value;
     }
 
+    public override string ToString() {
+        return Value.ToString();
+    }
+
     public static implicit operator ReverseInt(int value)
     {
         return new ReverseInt(value);
@@ -89,6 +97,10 @@ public class AddableFloat
     public AddableFloat Add(AddableFloat other)
     {
         return Value + other.Value;
+    }
+
+    public override string ToString() {
+        return Value.ToString();
     }
 
     public static implicit operator AddableFloat(float value)
@@ -123,6 +135,10 @@ public class ReverseFloat
         return Value + other.Value;
     }
 
+    public override string ToString() {
+        return Value.ToString();
+    }
+
     public static implicit operator ReverseFloat(float value)
     {
         return new ReverseFloat(value);
@@ -152,6 +168,10 @@ public class AddableDouble
     public AddableDouble Add(AddableDouble other)
     {
         return Value + other.Value;
+    }
+
+    public override string ToString() {
+        return Value.ToString();
     }
 
     public static implicit operator AddableDouble(double value)
@@ -184,6 +204,10 @@ public class ReverseDouble
     public ReverseDouble Add(ReverseDouble other)
     {
         return Value + other.Value;
+    }
+
+    public override string ToString() {
+        return Value.ToString();
     }
 
     public static implicit operator ReverseDouble(double value)
