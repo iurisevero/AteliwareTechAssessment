@@ -302,4 +302,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab72fe4f38f60592c9938768e909bad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpPointText: {fileID: 9008047957790926969}
+  nodePointText: {fileID: 9008047957790926969}

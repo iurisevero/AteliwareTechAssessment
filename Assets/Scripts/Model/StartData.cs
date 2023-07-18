@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class StartData : MonoBehaviour
+public class StartData : NodeData
 {
-    [SerializeField] TextMeshProUGUI startPointText;
-
-    public void SetStart(string coordinate) {
-        startPointText.text = coordinate;
-    }
 }

@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e65e5217d2652eb2a22725c41bfbd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPointText: {fileID: 7723160773923847713}
+  nodePointText: {fileID: 7723160773923847713}
 --- !u!1 &7723160775052376755
 GameObject:
   m_ObjectHideFlags: 0

@@ -145,8 +145,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9047695556344061871}
   - component: {fileID: 9047695556344061869}
-  - component: {fileID: 9047695556344061870}
   - component: {fileID: 1225893786139798902}
+  - component: {fileID: 9047695556344061870}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -183,6 +183,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9047695556344061864}
   m_CullTransparentMesh: 1
+--- !u!114 &1225893786139798902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047695556344061864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b8b532c492aa807a0ca36d215162b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightText: {fileID: 5234071545672943573}
 --- !u!114 &9047695556344061870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,16 +226,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1225893786139798902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9047695556344061864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b8b532c492aa807a0ca36d215162b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weightText: {fileID: 5234071545672943573}

@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PickUpData : MonoBehaviour
+public class PickUpData : NodeData
 {
-    [SerializeField] TextMeshProUGUI pickUpPointText;
-
-    public void SetPickUp(string coordinate) {
-        pickUpPointText.text = coordinate;
-    }
 }

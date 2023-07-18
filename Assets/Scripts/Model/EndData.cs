@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class EndData : MonoBehaviour
+public class EndData : NodeData
 {
-    [SerializeField] TextMeshProUGUI endPointText;
-
-    public void SetEndPoint(string coordinate) {
-        endPointText.text = coordinate;
-    }
 }
