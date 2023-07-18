@@ -16,6 +16,7 @@ public class UserInputController : MonoBehaviour
     [SerializeField] Button getRoute;
     [SerializeField] LastDeliveriesController lastDeliveriesController;
     [SerializeField] PathPrintController pathPrintController;
+    [SerializeField] GridController gridController;
 
     public void Update() {
         getRoute.interactable = (
@@ -46,6 +47,11 @@ public class UserInputController : MonoBehaviour
             var path2 = board.GetSSPDPath(pickUpPoint.GetInputValue(), endPoint.GetInputValue());
 
             path.AddRange(path2);
+            string debug = "Path: ";
+            foreach(var nodes in path) {
+                debug += "(" + nodes.Item1 + ", " + nodes.Item2 + ") ";
+            }
+            Debug.Log(debug);
 
             lastDeliveriesController.AddDeliveryToList(
                 startPoint.GetInputValue(), 
@@ -55,6 +61,13 @@ public class UserInputController : MonoBehaviour
             );
 
             pathPrintController.PrintPath(
+                pickUpPoint.GetInputValue(),
+                endPoint.GetInputValue(),
+                path
+            );
+
+            gridController.TraversePath(
+                startPoint.GetInputValue(), 
                 pickUpPoint.GetInputValue(),
                 endPoint.GetInputValue(),
                 path

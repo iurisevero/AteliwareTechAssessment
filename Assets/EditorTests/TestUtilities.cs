@@ -10,17 +10,21 @@ public class TestUtilities
     // A Test behaves as an ordinary method
     [Test]
     public void TestChessboardToMatriz() {
-        (int, int) coordinate = Utilities.ChessboardToMatriz("B1");
-        Assert.AreEqual((1, 7), coordinate);
+        Vector2 expect = new Vector2(1, 7);
+        Vector2 coordinate = Utilities.ChessboardToMatriz("B1");
+        Assert.AreEqual(expect, coordinate);
 
+        expect.Set(7, 5);
         coordinate = Utilities.ChessboardToMatriz("H3");
-        Assert.AreEqual((7, 5), coordinate);
+        Assert.AreEqual(expect, coordinate);
 
+        expect.Set(3, 0);
         coordinate = Utilities.ChessboardToMatriz("d8");
-        Assert.AreEqual((3, 0), coordinate);
+        Assert.AreEqual(expect, coordinate);
 
+        expect.Set(-1, -1);
         coordinate = Utilities.ChessboardToMatriz("J9");
-        Assert.AreEqual((-1, -1), coordinate);
+        Assert.AreEqual(expect, coordinate);
     }
 
     [Test]

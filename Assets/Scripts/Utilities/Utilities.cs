@@ -22,14 +22,20 @@ public static class Utilities
         {'G', 6},
         {'H', 7}
     };
-    public static (int, int) ChessboardToMatriz(string coordinate) {
-        (int, int) matrizCoordinate = (-1, -1);
+    public static Vector2 ChessboardToMatriz(string coordinate) {
+        Vector2 matrizCoordinate = new Vector2(-1, -1);
         coordinate = coordinate.ToUpper();
 
         if(CheckChessboardCoordinate(coordinate)) {
-            matrizCoordinate.Item1 = chessboardLetterToInt[coordinate[0]];
-            matrizCoordinate.Item2 = chessboardSize - (coordinate[1] - '0');
+            matrizCoordinate.x = chessboardLetterToInt[coordinate[0]];
+            matrizCoordinate.y = chessboardSize - (coordinate[1] - '0');
         }
         return matrizCoordinate;
+    }
+
+    public static Vector2 GetDirectionFromNodes(string from, string to) {
+        Vector2 fromValue = ChessboardToMatriz(from);
+        Vector2 toValue = ChessboardToMatriz(to);
+        return toValue - fromValue;
     }
 }

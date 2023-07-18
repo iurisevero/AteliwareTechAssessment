@@ -53,7 +53,7 @@ public class PathPrintController : MonoBehaviour
 
     private void InstantiateStartNode(string node) {
         GameObject startPointObj = Instantiate(
-            startPrefab, Vector3.zero, Quaternion.Euler(0, 0, 0)
+            startPrefab, Vector3.zero, Quaternion.identity
         );
         SetObjParent(startPointObj);
         StartData startData = startPointObj.GetComponent<StartData>();
@@ -62,7 +62,7 @@ public class PathPrintController : MonoBehaviour
 
     private void InstantiatePickUpNode(string node) {
         GameObject pickUpPointObj = Instantiate(
-            pickUpPrefab, Vector3.zero, Quaternion.Euler(0, 0, 0)
+            pickUpPrefab, Vector3.zero, Quaternion.identity
         );
         SetObjParent(pickUpPointObj);
         PickUpData pickUpData = pickUpPointObj.GetComponent<PickUpData>();
@@ -71,7 +71,7 @@ public class PathPrintController : MonoBehaviour
 
     private void InstantiateEndNode(string node) {
         GameObject endPointObj = Instantiate(
-            endPrefab, Vector3.zero, Quaternion.Euler(0, 0, 0)
+            endPrefab, Vector3.zero, Quaternion.identity
         );
         SetObjParent(endPointObj);
         EndData endData = endPointObj.GetComponent<EndData>();
