@@ -98,7 +98,7 @@ public class PathPrintController : MonoBehaviour
             }
         }
 
-        arrowObj = DequeueArrow("");
+        arrowObj = DequeueArrow(path[path.Count-1].Item2.Item2.ToString());
         SetObjParent(arrowObj);
         InstantiateEndNode(destiny);
     }
