@@ -45,10 +45,21 @@ The assessment object of delivery needs to be a **public repository on GitHub** 
 
 ## The Solution
 
-TODO
+The solution can be acessed at the following url [Ateliware Assessment](https://ateliwareassessment.web.app/). It was developed using Unity version 2021.3.15f1 and deployed using Firebase. 
 
-### Links utilizados
+![Running application](/Images/running.png)
 
+The software consists of three main areas: user input, list of deliveries and print of the path. The user input area receives the 3 points that defines the start point of the drone, the location of the delivery and the destination. After clicking the "Get Route" button, the informations of the delivery are added to the list of last deliveries and printed at the separated area. At the same time the path made by the algorithm are inserted at the botton of the page and a animation of the drone making the route are presented.
+
+The Single Source Shortest Path Dijkstra algorithm was used to define the route, using a adjacency list to represent the board. A list of "parents" was added to enable a backing track to get the path made.
+
+![Drone animation](/Images/pathAnimation.png)
+
+### References Links
+
+- Dijkstra Algorithm
+    - https://github.com/MatheusFaria/TEP/blob/master/Grafos/sssp.md
+    - https://github.com/edsomjr/TEP/blob/master/Grafos/slides/dijkstra/dijkstra.pdf
 - Unity Test Framework
     - https://docs.unity3d.com/Packages/com.unity.test-framework@1.1/manual/index.html
     - https://www.youtube.com/watch?v=pr5FBtu5SvQ&ab_channel=MinaP%C3%AAcheux
