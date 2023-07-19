@@ -47,7 +47,7 @@ The assessment object of delivery needs to be a **public repository on GitHub** 
 
 The solution can be acessed at the following url [Ateliware Assessment](https://ateliwareassessment.web.app/). It was developed using Unity version 2021.3.15f1 and deployed using Firebase. 
 
-The application was developed to be used on a computer and may not work correctly on mobile devices.
+The application was developed to be used on a computer and don't work correctly on mobile devices.
 
 ### How to Use
 
