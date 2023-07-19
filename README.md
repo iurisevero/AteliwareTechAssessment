@@ -46,3 +46,15 @@ The assessment object of delivery needs to be a **public repository on GitHub** 
 ## The Solution
 
 TODO
+
+### Links utilizados
+
+- Unity Test Framework
+    - https://docs.unity3d.com/Packages/com.unity.test-framework@1.1/manual/index.html
+    - https://www.youtube.com/watch?v=pr5FBtu5SvQ&ab_channel=MinaP%C3%AAcheux
+    - https://github.com/MinaPecheux/UnityTutorials-UnitTesting/blob/master/Assets/EditorTests/MatrixGettersTests.cs
+- Deploy WebGL
+    - https://forum.unity.com/threads/best-cloud-server-data-store-for-uploading-webgl-games.433915/
+    - https://medium.com/@aboutin/host-unity-games-on-github-pages-for-free-2ed6b4d9c324
+    - https://levelup.gitconnected.com/how-to-publish-your-unity3d-html5-application-or-game-to-aws-3bb053b59d21
+    - https://medium.com/firebase-developers/firebase-with-unity-even-in-webgl-build-8891e6f9b33c
