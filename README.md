@@ -47,6 +47,8 @@ The assessment object of delivery needs to be a **public repository on GitHub** 
 
 The solution can be acessed at the following url [Ateliware Assessment](https://ateliwareassessment.web.app/). It was developed using Unity version 2021.3.15f1 and deployed using Firebase. 
 
+The application was developed to be used on a computer and may not work correctly on mobile devices.
+
 ### How to Use
 
 The application uses both keyboard and mouse, but can be used with keyboard only. It's possible to select each input field with the mouse and insert the desired value, finishing with a click on the ```Get Route``` button, or you can use the ```Tab``` key to transition between the fields and finish the operation with the ```Return``` key. If the inputs are valid, the shortest route will be calculated and a animation of the path will be displayed. The animation can be skipped with the ```Space``` key or by clicking on the ```Skip``` button.
