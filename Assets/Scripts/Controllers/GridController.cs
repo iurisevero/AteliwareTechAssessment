@@ -112,5 +112,6 @@ public class GridController : MonoBehaviour
 
     public void SkipAnimation() {
         StopCoroutine(pathTraversalRoutine);
+        animator.SetTrigger("Out");
     }
 }

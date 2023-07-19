@@ -11,6 +11,10 @@ public class UserInputData : MonoBehaviour
     [SerializeField] TMP_InputField inputField;
     [SerializeField] Image checkImage;
 
+    public void SelectInputField() {
+        inputField.Select();
+    }
+
     public string GetInputValue() {
         return inputField.text;
     }

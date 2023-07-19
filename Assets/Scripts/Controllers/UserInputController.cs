@@ -10,20 +10,69 @@ using System;
 public class UserInputController : MonoBehaviour
 {
     const string API_URL = "https://mocki.io/v1/10404696-fd43-4481-a7ed-f9369073252f";
+    const int fieldsCount = 3;
     [SerializeField] UserInputData startPoint;
     [SerializeField] UserInputData pickUpPoint;
     [SerializeField] UserInputData endPoint; 
     [SerializeField] Button getRoute;
+    [SerializeField] Toggle animationToggle;
     [SerializeField] LastDeliveriesController lastDeliveriesController;
     [SerializeField] PathPrintController pathPrintController;
     [SerializeField] GridController gridController;
+    private int fieldsIndex = -1;
 
-    public void Update() {
-        getRoute.interactable = (
-            Utilities.CheckChessboardCoordinate(startPoint.GetInputValue()) &&
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Debug.Log($"Input Get Down fieldIndex: {fieldsIndex}");
+            fieldsIndex = (fieldsIndex + 1) % fieldsCount;
+            switch (fieldsIndex)
+            {
+                case 1:
+                    pickUpPoint.SelectInputField();
+                    break;
+                case 2:
+                    endPoint.SelectInputField();
+                    break;
+                default:
+                    startPoint.SelectInputField();
+                    break;
+            }
+        }
+
+        if(Utilities.CheckChessboardCoordinate(startPoint.GetInputValue()) &&
             Utilities.CheckChessboardCoordinate(pickUpPoint.GetInputValue()) &&
             Utilities.CheckChessboardCoordinate(endPoint.GetInputValue())
-        );
+        ) {
+            getRoute.interactable = (true);
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                GetRoute();
+            }
+        } else {
+            getRoute.interactable = (false);
+        }
+    }
+
+    private IEnumerator SendRequest(IObserver<string> observer, string url)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.Success)
+            {
+                observer.OnNext(www.downloadHandler.text);
+                observer.OnCompleted();
+            }
+            else
+            {
+                observer.OnError(new Exception(www.error));
+            }
+        }
+    }
+
+    public void OnSelectInputField(int index) {
+        fieldsIndex = index;
     }
 
     public void GetRoute() {
@@ -66,12 +115,14 @@ public class UserInputController : MonoBehaviour
                 path
             );
 
-            gridController.TraversePath(
-                startPoint.GetInputValue(), 
-                pickUpPoint.GetInputValue(),
-                endPoint.GetInputValue(),
-                path
-            );
+            if(animationToggle.isOn) {
+                gridController.TraversePath(
+                    startPoint.GetInputValue(), 
+                    pickUpPoint.GetInputValue(),
+                    endPoint.GetInputValue(),
+                    path
+                );
+            }
         }, error =>
         {
             Debug.LogError($"Erro na requisição GET: {error.Message}");
@@ -93,23 +144,5 @@ public class UserInputController : MonoBehaviour
             }
         }
         return board;
-    }
-
-    private IEnumerator SendRequest(IObserver<string> observer, string url)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.Success)
-            {
-                observer.OnNext(www.downloadHandler.text);
-                observer.OnCompleted();
-            }
-            else
-            {
-                observer.OnError(new Exception(www.error));
-            }
-        }
     }
 }
