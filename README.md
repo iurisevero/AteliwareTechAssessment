@@ -47,9 +47,15 @@ The assessment object of delivery needs to be a **public repository on GitHub** 
 
 The solution can be acessed at the following url [Ateliware Assessment](https://ateliwareassessment.web.app/). It was developed using Unity version 2021.3.15f1 and deployed using Firebase. 
 
+### How to Use
+
+The application uses both keyboard and mouse, but can be used with keyboard only. It's possible to select each input field with the mouse and insert the desired value, finishing with a click on the ```Get Route``` button, or you can use the ```Tab``` key to transition between the fields and finish the operation with the ```Return``` key. If the inputs are valid, the shortest route will be calculated and a animation of the path will be displayed. The animation can be skipped with the ```Space``` key or by clicking on the ```Skip``` button.
+
 ![Running application](/Images/running.png)
 
-The software consists of three main areas: user input, list of deliveries and print of the path. The user input area receives the 3 points that defines the start point of the drone, the location of the delivery and the destination. After clicking the "Get Route" button, the informations of the delivery are added to the list of last deliveries and printed at the separated area. At the same time the path made by the algorithm are inserted at the botton of the page and a animation of the drone making the route are presented. The duration of the animation varies according to the time needed to traverse the path, with the passage between one node and the other taking a tenth of the time in seconds described for the graph.
+### The Software
+
+The software consists of three main areas: user input, list of deliveries and print of the path. The user input area receives the 3 points that defines the start point of the drone, the location of the delivery and the destination. After clicking the "Get Route" button, the informations of the delivery are added to the list of last deliveries and printed at the separated area. At the same time the path made by the algorithm are inserted at the botton of the page and a animation of the drone making the route are presented. The duration of the animation varies according to the time needed to traverse the path, with the passage between one node and the other taking a twentieth of the time in seconds described on the graph.
 
 The Single Source Shortest Path Dijkstra algorithm was used to define the route, using a adjacency list to represent the board. A list of "parents" was added to enable a backing track to get the path made.
 

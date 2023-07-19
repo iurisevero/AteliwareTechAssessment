@@ -14,29 +14,12 @@ public class GridController : MonoBehaviour
     private static readonly Color32 packageColor = new Color32(255, 255, 83, 255);
     private static readonly Color32 destinationColor = new Color32(192, 0, 0, 255);
     private Coroutine pathTraversalRoutine;
+    public bool playingAnimation = false;
 
-    void Start()
-    {
-        // List<(string, string)> path = new List<(string, string)>(){
-        //     ("A1", "B1"),
-        //     ("B1", "C1"),
-        //     ("C1", "C2"),
-        //     ("C2", "C3"),
-        //     ("C3", "D3"),
-        //     ("D3", "D4"),
-        //     ("D4", "D5"),
-        //     ("D5", "E5"),
-        //     ("E5", "E6"),
-        //     ("E6", "F6"),
-        //     ("F6", "G6"),
-        //     ("G6", "G7"),
-        //     ("G7", "H7"),
-        //     ("H7", "H8")
-        // };
-        // string startPoint = "A1", pickUpPoint = "D4", endPoint = "H8";
-        // TraversePath(
-        //     startPoint, pickUpPoint, endPoint, path
-        // );
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space) && playingAnimation) {
+            SkipAnimation();
+        }
     }
 
     private IEnumerator TraversePathRoutine(
@@ -50,7 +33,7 @@ public class GridController : MonoBehaviour
             Vector2 direction = Utilities.GetDirectionFromNodes(
                 nodes.Item1, nodes.Item2.Item1
             );
-            yield return StartCoroutine(Move(direction, nodes.Item2.Item2.Value / 10));
+            yield return StartCoroutine(Move(direction, nodes.Item2.Item2.Value / 20));
             
             if(nodes.Item2.Item1 == pickUpPoint){
                 package.SetActive(false);
@@ -64,6 +47,7 @@ public class GridController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         animator.SetTrigger("Out");
+        playingAnimation = false;
     }
 
     private IEnumerator Move(Vector2 direction, float moveDuration) {
@@ -108,10 +92,12 @@ public class GridController : MonoBehaviour
     ) {
         SetInitialPosition(startPoint, pickUpPoint, endPoint);
         pathTraversalRoutine = StartCoroutine(TraversePathRoutine(pickUpPoint, path));
+        playingAnimation = true;
     }
 
     public void SkipAnimation() {
         StopCoroutine(pathTraversalRoutine);
         animator.SetTrigger("Out");
+        playingAnimation = false;
     }
 }

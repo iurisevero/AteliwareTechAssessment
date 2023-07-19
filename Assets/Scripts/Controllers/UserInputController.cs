@@ -6,6 +6,7 @@ using UniRx;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System;
+using UnityEngine.EventSystems;
 
 public class UserInputController : MonoBehaviour
 {
@@ -42,7 +43,8 @@ public class UserInputController : MonoBehaviour
 
         if(Utilities.CheckChessboardCoordinate(startPoint.GetInputValue()) &&
             Utilities.CheckChessboardCoordinate(pickUpPoint.GetInputValue()) &&
-            Utilities.CheckChessboardCoordinate(endPoint.GetInputValue())
+            Utilities.CheckChessboardCoordinate(endPoint.GetInputValue()) &&
+            !gridController.playingAnimation
         ) {
             getRoute.interactable = (true);
             if (Input.GetKeyDown(KeyCode.Return)) {
@@ -76,6 +78,7 @@ public class UserInputController : MonoBehaviour
     }
 
     public void GetRoute() {
+        EventSystem.current.SetSelectedGameObject(null);
         WeightedGraph<string, AddableFloat> board;
         Observable.FromCoroutine<string>(observer =>
         {
