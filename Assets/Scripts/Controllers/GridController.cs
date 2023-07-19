@@ -41,18 +41,18 @@ public class GridController : MonoBehaviour
 
     private IEnumerator TraversePathRoutine(
         string pickUpPoint,
-        List<(string, string)> path
+        List<(string, (string, AddableFloat))> path
     ) {
         animator.SetTrigger("In");
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
 
         foreach(var nodes in path) {
             Vector2 direction = Utilities.GetDirectionFromNodes(
-                nodes.Item1, nodes.Item2
+                nodes.Item1, nodes.Item2.Item1
             );
-            yield return StartCoroutine(Move(direction, 1f));
+            yield return StartCoroutine(Move(direction, nodes.Item2.Item2.Value / 10));
             
-            if(nodes.Item2 == pickUpPoint){
+            if(nodes.Item2.Item1 == pickUpPoint){
                 package.SetActive(false);
                 drone.GetComponentInChildren<Image>().color = packageColor;
             }
@@ -104,7 +104,7 @@ public class GridController : MonoBehaviour
 
     public void TraversePath(
         string startPoint, string pickUpPoint, string endPoint,
-        List<(string, string)> path
+        List<(string, (string, AddableFloat))> path
     ) {
         SetInitialPosition(startPoint, pickUpPoint, endPoint);
         pathTraversalRoutine = StartCoroutine(TraversePathRoutine(pickUpPoint, path));

@@ -78,13 +78,15 @@ public class PathPrintController : MonoBehaviour
         endData.SetNode(node);
     }
 
-    public void PrintPath(string pickUp, string destiny, List<(string, string)> path) {
+    public void PrintPath(
+        string pickUp, string destiny, List<(string, (string, AddableFloat))> path
+    ) {
         Clear();
 
         InstantiateStartNode(path[0].Item1);
         GameObject arrowObj;
         for(int i=1; i < path.Count; ++i) {
-            arrowObj = DequeueArrow("");
+            arrowObj = DequeueArrow(path[i-1].Item2.Item2.ToString());
             SetObjParent(arrowObj);
             
 

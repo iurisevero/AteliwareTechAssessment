@@ -85,34 +85,29 @@ public class UserInputController : MonoBehaviour
             Debug.Log($"Resposta da requisição GET: {response}");
             board = HandleResponse(response);
 
-            float start = board.SSSPDijkstra(startPoint.GetInputValue(), pickUpPoint.GetInputValue(), 0, -1).Value;
-            Debug.Log($"Dijkstra from {startPoint.GetInputValue()} to {pickUpPoint.GetInputValue()}: {start}");
+            float timeToGetPackage = board.SSSPDijkstra(startPoint.GetInputValue(), pickUpPoint.GetInputValue(), 0, -1).Value;
+            Debug.Log($"Dijkstra from {startPoint.GetInputValue()} to {pickUpPoint.GetInputValue()}: {timeToGetPackage}");
             
-            var path = board.GetSSPDPath(startPoint.GetInputValue(), pickUpPoint.GetInputValue());
+            var pathToPackage = board.GetSSPDPath(startPoint.GetInputValue(), pickUpPoint.GetInputValue());
 
-            float mid = board.SSSPDijkstra(pickUpPoint.GetInputValue(), endPoint.GetInputValue(), 0, -1).Value;
-            Debug.Log($"Dijkstra from {pickUpPoint.GetInputValue()} to {endPoint.GetInputValue()}: {mid}");
+            float timeToGetDestination = board.SSSPDijkstra(pickUpPoint.GetInputValue(), endPoint.GetInputValue(), 0, -1).Value;
+            Debug.Log($"Dijkstra from {pickUpPoint.GetInputValue()} to {endPoint.GetInputValue()}: {timeToGetDestination}");
     
-            var path2 = board.GetSSPDPath(pickUpPoint.GetInputValue(), endPoint.GetInputValue());
+            var pathToDestination = board.GetSSPDPath(pickUpPoint.GetInputValue(), endPoint.GetInputValue());
 
-            path.AddRange(path2);
-            string debug = "Path: ";
-            foreach(var nodes in path) {
-                debug += "(" + nodes.Item1 + ", " + nodes.Item2 + ") ";
-            }
-            Debug.Log(debug);
-
+            pathToPackage.AddRange(pathToDestination);
+    
             lastDeliveriesController.AddDeliveryToList(
                 startPoint.GetInputValue(), 
                 pickUpPoint.GetInputValue(),
                 endPoint.GetInputValue(),
-                start + mid
+                timeToGetPackage + timeToGetDestination
             );
 
             pathPrintController.PrintPath(
                 pickUpPoint.GetInputValue(),
                 endPoint.GetInputValue(),
-                path
+                pathToPackage
             );
 
             if(animationToggle.isOn) {
@@ -120,7 +115,7 @@ public class UserInputController : MonoBehaviour
                     startPoint.GetInputValue(), 
                     pickUpPoint.GetInputValue(),
                     endPoint.GetInputValue(),
-                    path
+                    pathToPackage
                 );
             }
         }, error =>
